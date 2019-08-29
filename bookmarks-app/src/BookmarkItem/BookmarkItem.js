@@ -26,11 +26,20 @@ export default function BookmarkItem(props) {
         >
           Delete
         </button>
+        <button
+          className='BookmarkItem__description'
+          onClick={() => {
+            props.editBookmark(props.id)
+            props.changePage('edit')
+          }}
+        >
+          Edit
+        </button>
       </div>
     </li>
   )
 }
 
 BookmarkItem.defaultProps = {
-  onClickDelete: () => {},
+  onClickEdit: () => {},
 }

@@ -4,6 +4,7 @@ import BookmarkList from './BookmarkList/BookmarkList';
 import Nav from './Nav/Nav';
 import config from './config';
 import './App.css';
+import EditBookmark from './EditBookmark/EditBookmark';
 
 const bookmarks = [
   // {
@@ -31,9 +32,10 @@ const bookmarks = [
 
 class App extends Component {
   state = {
-    page: 'list',
+    page: 'edit',
     bookmarks,
     error: null,
+    edit: 3,
   };
 
   changePage = (page) => {
@@ -53,6 +55,22 @@ class App extends Component {
       bookmarks: [ ...this.state.bookmarks, bookmark ],
     })
   }
+
+  editBookmark = id => {
+    this.setState({ 
+      edit: id
+    })
+  }
+
+  onEditBookmark = updatedBookmark => {
+    let oldBookmarks = this.state.bookmarks.filter(bookmark => 
+      {
+        return bookmark.id !== updatedBookmark.id 
+      })
+      this.setState({
+        bookmarks: [...oldBookmarks, updatedBookmark ]
+      })
+    }
 
   componentDidMount() {
   
@@ -75,6 +93,22 @@ class App extends Component {
 
   render() {
     const { page, bookmarks } = this.state
+    const [edittingBookmark] = bookmarks.filter (
+      bookmark => bookmark.id === this.state.edit 
+    )
+      let title 
+      let description
+      let url 
+      let rating 
+      if (edittingBookmark) {
+        title = edittingBookmark.title
+        description = edittingBookmark.description
+        url = edittingBookmark.url
+        rating = edittingBookmark.rating
+      }
+
+
+
     return (
       <main className='App'>
         <h1>Bookmarks!</h1>
@@ -89,8 +123,20 @@ class App extends Component {
           {page === 'list' && (
             <BookmarkList
               bookmarks={bookmarks}
+              changePage={this.changePage}
+              editBookmark={this.editBookmark}
             />
           )}
+        {page === 'edit' && (
+           <EditBookmark 
+           title= {title}
+           url= {url}
+           description={description}
+           rating= {rating}
+           id= {this.state.edit} 
+           onEditBookmark= {this.onEditBookmark}
+           changePage= {this.changePage}/>
+          )} 
         </div>
       </main>
     );

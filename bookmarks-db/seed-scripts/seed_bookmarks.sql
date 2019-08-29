@@ -1,6 +1,6 @@
 BEGIN;
 
-INSERT INTO bookmarks (name, description, url, rating)
+INSERT INTO bookmarks (title, description, url, rating)
 VALUES
 ('Youtube', 'a website for watching videos', 'http://www.youtube.com', 4),
 ('Google', 'the best search engine around', 'http://www.google.com', 5),

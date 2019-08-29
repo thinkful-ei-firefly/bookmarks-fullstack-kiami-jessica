@@ -55,6 +55,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+  
     fetch(config.API_ENDPOINT, {
       method: 'GET',
       headers: {

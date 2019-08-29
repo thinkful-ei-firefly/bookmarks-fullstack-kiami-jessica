@@ -28,9 +28,9 @@ bookmarkRouter
   .route('/')
   .post(bodyParser, (req, res, next) => {
     const db = req.app.get('db');    
-    const { name, description, url, rating=1 } = req.body;
+    const { title, description, url, rating=1 } = req.body;
     
-    if(!name) {
+    if(!title) {
       return res
         .status(400)
         .json({error: {message: 'Title is required'}});
@@ -49,7 +49,7 @@ bookmarkRouter
     }
 
     const newBookmark = { 
-      name,
+      title,
       description,
       url,
       rating

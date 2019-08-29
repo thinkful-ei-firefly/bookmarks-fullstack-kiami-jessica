@@ -32,7 +32,6 @@ if (NODE_ENV !== 'production') {
 app.use(function validateBearerToken(req, res, next) {
   const apiToken = process.env.API_KEY;
   const authToken = req.get('Authorization');
-  console.log(authToken);
   
   if (!authToken || authToken.split(' ')[1] !== apiToken) {
     logger.error(`Unauthorized request to path: ${req.path}`);

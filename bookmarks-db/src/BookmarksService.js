@@ -18,6 +18,13 @@ const BookmarksService = {
       .returning('*');
   },
 
+  updateBookmarkById (db, updateId, newInfo) {
+    return db.from('bookmarks')
+      .where({ id: updateId})
+      .update(newInfo)
+      .returning('*');
+  },
+
   deleteBookmarkById (db, id) {
     return db.from('bookmarks')
       .where({ id })

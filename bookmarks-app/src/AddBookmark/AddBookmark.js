@@ -49,7 +49,7 @@ class AddBookmark extends Component {
         url.value = ''
         description.value = ''
         rating.value = ''
-        this.props.onAddBookmark(data)
+        this.props.onAddBookmark(data[0])
       })
       .catch(error => {
         this.setState({ error })
